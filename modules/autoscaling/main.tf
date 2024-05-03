@@ -28,13 +28,14 @@ resource "aws_autoscaling_group" "bar" {
   vpc_zone_identifier = var.private_subnets
   health_check_type    = var.health_check_type
   health_check_grace_period      = 300
-  target_group_arns = var.tg_arn
+ 
 
   launch_template {
     id      = aws_launch_template.foobar.id
     version = "$Latest"
   }
 }
+
 
 
 

@@ -19,6 +19,4 @@ variable "health_check_type" {}
 variable "private_subnets" {
 }
 
-variable "tg_arn" {
-  
-}
+

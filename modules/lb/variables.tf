@@ -11,4 +11,7 @@ variable "vpc" {
    
 }
 
+variable "autoscaling_group_id" {
+  
+}
 

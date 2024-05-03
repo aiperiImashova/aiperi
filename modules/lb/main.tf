@@ -3,12 +3,14 @@ resource "aws_lb" "alb" {
   internal= false 
   load_balancer_type = "application" 
   subnets =  var.subnets
-  security_groups = var.sgroup
+  # security_groups = var.sgroup
  
   tags = { 
     "Name"="${var.alb_name}-alb" 
   } 
 } 
+
+
  
 resource "aws_lb_target_group" "tg" { 
   port= 80 
@@ -24,6 +26,14 @@ resource "aws_lb_target_group" "tg" {
   }
 } 
  
+resource "aws_autoscaling_attachment" "autoscaling_attachment" {
+  autoscaling_group_name = var.autoscaling_group_id
+  lb_target_group_arn   = aws_lb_target_group.tg.arn
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 
 resource "aws_lb_listener" "listener" { 
   load_balancer_arn = aws_lb.alb.arn 
